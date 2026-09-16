@@ -1,20 +1,34 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# SkillMesh: Labour-Market Intelligence & Curriculum Alignment Platform
 
-# Run and deploy your AI Studio app
+**SIH Problem Statement ID: 26134**
 
-This contains everything you need to run your app locally.
+## Overview
 
-View your app in AI Studio: https://ai.studio/apps/ce776b89-d12a-4519-bd0a-6ed258dfd0f4
+SkillMesh is a data-driven intelligence platform that connects government vocational training programs (NSDC, MSKVIB, DVET, ITIs) with real-time industry demands across districts in Maharashtra.
+
+By comparing **Industry/Job Demand** against **Vocational Course Coverage**, SkillMesh:
+
+1. Calculates a mathematical **Curriculum Alignment Score** (0-100).
+2. Flags **High Skill Gaps (≥20% deficit)** and **Moderate Skill Gaps (10-19%)**.
+3. Generates actionable curriculum update recommendations.
+4. Provides an **Employer Feedback Pipeline**.
+5. Surfaces **Top 10 Emerging Skills** with predictive demand trends.
+6. Supports **English, Marathi (मराठी), and Hindi (हिंदी)**.
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Python
+- Flask
+- SQLite
+- Google Gemini API
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+### Frontend
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
