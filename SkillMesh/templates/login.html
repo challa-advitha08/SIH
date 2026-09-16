@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}SkillMesh - Portal Login | SIH 26134{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+  <div class="col-lg-7 col-md-9">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <a href="{{ url_for('index') }}" class="text-decoration-none text-secondary small fw-bold">
+        ← Back to Overview
+      </a>
+      <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1">
+        SIH 26134 Secure Login
+      </span>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+      <div class="card-header bg-dark text-white p-4">
+        <div class="d-flex align-items-center gap-3">
+          <div class="fs-1">🔐</div>
+          <div>
+            <h4 class="fw-bold mb-0">SkillMesh Portal Login</h4>
+            <p class="small text-white-50 mb-0">Maharashtra Vocational Intelligence & Curriculum Alignment</p>
+          </div>
+        </div>
+
+        <!-- Role Select Buttons -->
+        <div class="d-flex gap-2 mt-3 pt-3 border-top border-secondary">
+          <button type="button" class="btn btn-sm btn-light fw-bold" onclick="selectRole('admin')">
+            🏛️ Government Admin
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-light fw-bold" onclick="selectRole('employer')">
+            🏭 Industry Partner
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-light fw-bold" onclick="selectRole('student')">
+            🎓 Student / Guest
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body p-4 p-md-5">
+        <!-- Active Persona Banner -->
+        <div class="alert alert-light border d-flex justify-content-between align-items-center mb-4 py-2 px-3">
+          <div>
+            <div id="roleTitle" class="fw-bold text-dark small">🏛️ State Administrator Account</div>
+            <div id="roleDesc" class="text-muted" style="font-size: 0.8rem;">Dr. Suresh Patil (DVET Maharashtra)</div>
+          </div>
+          <button type="button" class="btn btn-sm btn-primary fw-bold" onclick="autoFillAndSubmit()">
+            1-Click Demo Login
+          </button>
+        </div>
+
+        <form method="POST" action="{{ url_for('login') }}" id="loginForm">
+          <input type="hidden" name="role" id="selectedRole" value="admin">
+
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-uppercase text-secondary">
+              Email or Official Username
+            </label>
+            <input
+              type="text"
+              name="email"
+              id="loginEmail"
+              class="form-control rounded-3 py-2"
+              value="admin@mahasiksham.gov.in"
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <label class="form-label small fw-bold text-uppercase text-secondary mb-0">
+                Password
+              </label>
+              <a href="#" onclick="alert('In demo mode, please use the 1-Click Demo Login button.'); return false;" class="small text-primary text-decoration-none">
+                Forgot password?
+              </a>
+            </div>
+            <input
+              type="password"
+              name="password"
+              id="loginPass"
+              class="form-control rounded-3 py-2"
+              value="SkillGov@2026"
+              required
+            >
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="rememberMe" checked>
+            <label class="form-check-label small text-secondary" for="rememberMe">
+              Remember this device (256-Bit SSL encrypted)
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold rounded-3 mb-3">
+            Sign In to SkillMesh Portal →
+          </button>
+        </form>
+
+        <div class="text-center pt-3 border-top">
+          <span class="small text-muted">Want to explore without logging in?</span>
+          <a href="{{ url_for('dashboard') }}" class="small fw-bold text-primary text-decoration-none ms-1">
+            Browse Public Dashboard →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const accounts = {
+    admin: {
+      email: 'admin@mahasiksham.gov.in',
+      pass: 'SkillGov@2026',
+      title: '🏛️ State Administrator Account',
+      desc: 'Dr. Suresh Patil (DVET Maharashtra)'
+    },
+    employer: {
+      email: 'talent@tatamotors.com',
+      pass: 'TataAuto@2026',
+      title: '🏭 Industry Employer Account',
+      desc: 'Anita Sharma (HR Head, Tata Motors Pune)'
+    },
+    student: {
+      email: 'student@mahadvet.org',
+      pass: 'Trainee@2026',
+      title: '🎓 Student / Public Trainee',
+      desc: 'Rahul Deshmukh (ITI Electrician, Nashik)'
+    }
+  };
+
+  function selectRole(role) {
+    document.getElementById('selectedRole').value = role;
+    const acc = accounts[role];
+    document.getElementById('loginEmail').value = acc.email;
+    document.getElementById('loginPass').value = acc.pass;
+    document.getElementById('roleTitle').innerText = acc.title;
+    document.getElementById('roleDesc').innerText = acc.desc;
+  }
+
+  function autoFillAndSubmit() {
+    document.getElementById('loginForm').submit();
+  }
+</script>
+{% endblock %}

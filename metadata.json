@@ -1,0 +1,6 @@
+{
+  "name": "SkillMesh",
+  "description": "Labour-Market Intelligence and Curriculum Alignment Platform connecting industry demand with government skill development programs (SIH-26134).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

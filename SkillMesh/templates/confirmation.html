@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}SkillMesh - Submission Confirmed | SIH 26134{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-5">
+  <div class="col-lg-6 text-center">
+    <div class="card border-0 shadow-lg rounded-5 bg-white p-5">
+      <div class="display-1 text-success mb-3 animate-bounce">
+        ✅
+      </div>
+
+      <span class="badge bg-success-subtle text-success border border-success-subtle text-uppercase fw-bold mb-2">
+        Recorded Successfully
+      </span>
+
+      <h2 class="fw-extrabold text-dark mb-2">Thank You!</h2>
+      <p class="text-muted mb-4">
+        Your industry requirements have been successfully submitted to the SkillMesh state labour-market intelligence database.
+      </p>
+
+      <div class="p-3 bg-light rounded-3 text-start small text-muted mb-4">
+        <div class="d-flex justify-content-between mb-1">
+          <span>Reference ID:</span>
+          <strong class="text-dark font-monospace">MSDM-REQ-2026-{{ range(1000, 9999)|random }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-1">
+          <span>Authority Review:</span>
+          <span class="badge bg-warning text-dark">DVET Maharashtra</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span>Curriculum Board:</span>
+          <span>Q4 Alignment Cycle</span>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+        <a href="{{ url_for('employer_portal') }}" class="btn btn-outline-secondary fw-bold rounded-3">
+          ↺ Submit Another Requirement
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary fw-bold rounded-3">
+          Go to State Dashboard →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

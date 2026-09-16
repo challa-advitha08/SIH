@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}SkillMesh - {{ district_name }} District Profile | SIH 26134{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+  <a href="{{ url_for('dashboard') }}" class="btn btn-sm btn-outline-secondary">
+    ← Back to State Dashboard
+  </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 bg-white p-4 mb-4">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+    <div>
+      <span class="badge bg-primary text-uppercase fw-bold mb-1">District Economic Cluster</span>
+      <h2 class="fw-extrabold text-dark mb-1">{{ district_name }} District Analysis</h2>
+      <p class="text-muted small mb-0">Industrial recruitment patterns and vocational training capacity.</p>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="{{ url_for('employer_portal') }}" class="btn btn-dark btn-sm fw-bold">
+        + Post Employer Requirements
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mb-4">
+  <!-- Top In-Demand Roles in District -->
+  <div class="col-lg-5">
+    <div class="card border-0 shadow-sm rounded-4 bg-white p-4 h-100">
+      <h5 class="fw-bold text-dark mb-3">Top In-Demand Roles in {{ district_name }}</h5>
+      <div class="list-group list-group-flush small">
+        <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5">
+          <div>
+            <div class="fw-bold text-dark">Data Analyst & BI Specialist</div>
+            <div class="text-muted">IT & Fintech Cluster</div>
+          </div>
+          <span class="badge bg-primary rounded-pill">1,820 Openings</span>
+        </div>
+        <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5">
+          <div>
+            <div class="fw-bold text-dark">EV Diagnostic Technician</div>
+            <div class="text-muted">Automotive Industrial Zone</div>
+          </div>
+          <span class="badge bg-primary rounded-pill">1,410 Openings</span>
+        </div>
+        <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5">
+          <div>
+            <div class="fw-bold text-dark">Cloud & DevOps Associate</div>
+            <div class="text-muted">Software Technology Parks</div>
+          </div>
+          <span class="badge bg-primary rounded-pill">950 Openings</span>
+        </div>
+        <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-2.5">
+          <div>
+            <div class="fw-bold text-dark">CNC Machine Operator</div>
+            <div class="text-muted">Precision Engineering Cluster</div>
+          </div>
+          <span class="badge bg-primary rounded-pill">820 Openings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- District Skill Demand Chart -->
+  <div class="col-lg-7">
+    <div class="card border-0 shadow-sm rounded-4 bg-white p-4 h-100">
+      <h5 class="fw-bold text-dark mb-2">Industry Demand vs Trainee Supply in {{ district_name }}</h5>
+      <p class="small text-muted mb-3">Survey data collected from district industrial associations (MIDC).</p>
+      <div style="height: 250px;">
+        <canvas id="districtChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Available Vocational Courses in District -->
+<div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden">
+  <div class="p-3 border-bottom bg-light">
+    <h6 class="fw-bold text-dark mb-0">Active Vocational Programs in {{ district_name }}</h6>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0 small">
+      <thead class="table-light text-uppercase fw-bold">
+        <tr>
+          <th class="ps-3">Course Name</th>
+          <th>NSQF Level</th>
+          <th>Placement Rate</th>
+          <th>Curriculum Status</th>
+          <th class="pe-3 text-end">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in courses %}
+        <tr>
+          <td class="ps-3 fw-bold text-dark">{{ c.course_name }}</td>
+          <td>Level {{ c.nsqf_level }}</td>
+          <td><span class="badge bg-success-subtle text-success border">{{ c.placement_rate }}%</span></td>
+          <td><span class="badge bg-warning text-dark">Audit Recommended</span></td>
+          <td class="pe-3 text-end">
+            <a href="{{ url_for('course_detail', course_id=c.id) }}" class="btn btn-sm btn-primary rounded-pill">
+              View Skill Gap →
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const ctx = document.getElementById('districtChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Python', 'SQL', 'Power BI', 'AI Basics', 'Cloud', 'EV Tech'],
+      datasets: [
+        {
+          label: 'Industry Hiring Demand %',
+          data: [90, 85, 80, 60, 82, 75],
+          backgroundColor: '#4f46e5'
+        },
+        {
+          label: 'Vocational Trainee Supply %',
+          data: [65, 75, 35, 15, 45, 30],
+          backgroundColor: '#f59e0b'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { max: 100, ticks: { callback: v => v + '%' } }
+      }
+    }
+  });
+</script>
+{% endblock %}

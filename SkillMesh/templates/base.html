@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}SkillMesh - Labour-Market Intelligence Platform (SIH 2026){% endblock %}</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Plus Jakarta Sans & Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar navbar-expand-lg navbar-dark bg-slate-900 sticky-top py-2 px-3 border-bottom border-dark shadow-sm">
+    <div class="container-fluid max-w-7xl">
+      <a class="navbar-brand d-flex items-center gap-2" href="{{ url_for('index') }}">
+        <span class="badge bg-primary fs-6 p-2 rounded-3">⚡</span>
+        <div>
+          <span class="fw-bold fs-5 text-white tracking-tight">SkillMesh</span>
+          <span class="d-none d-md-inline-block badge bg-warning text-dark ms-2" style="font-size: 0.7rem;">SIH 26134</span>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 gap-1">
+          <li class="nav-item">
+            <a class="nav-link text-white-50 hover-text-white fw-semibold" href="{{ url_for('dashboard') }}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white-50 hover-text-white fw-semibold" href="{{ url_for('district', district_name='Pune') }}">District View</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white-50 hover-text-white fw-semibold" href="{{ url_for('course_detail', course_id=1) }}">Course Audit</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white-50 hover-text-white fw-semibold" href="{{ url_for('emerging_skills_page') }}">Emerging Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white-50 hover-text-white fw-semibold" href="{{ url_for('employer_portal') }}">Employer Portal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white-50 hover-text-white fw-semibold" href="{{ url_for('employer_responses') }}">Submissions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-warning fw-bold" href="{{ url_for('login') }}">🔑 Login</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+          <!-- Language Selector -->
+          <select id="langSelect" class="form-select form-select-sm bg-dark text-white border-secondary" style="width: 140px;">
+            <option value="en" selected>English</option>
+            <option value="mr">मराठी (Marathi)</option>
+            <option value="hi">हिंदी (Hindi)</option>
+            <option value="gu">ગુજરાતી (Gujarati)</option>
+            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+            <option value="bn">বাংলা (Bengali)</option>
+          </select>
+
+          <!-- Voice / Help Button -->
+          <button type="button" class="btn btn-sm btn-outline-warning d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#helpModal">
+            <span>🔊</span> <span class="d-none d-sm-inline">Help</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="py-4">
+    <div class="container max-w-7xl">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- Universal Low-Literacy Help Modal -->
+  <div class="modal fade" id="helpModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow-lg">
+        <div class="modal-header bg-warning text-dark border-0 rounded-top-4">
+          <h5 class="modal-title fw-bold">🔊 Audio Guide & Help (मदत / सहायता)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4 text-secondary">
+          <p class="fs-6 mb-3 text-dark fw-semibold" id="helpText">
+            Welcome to SkillMesh. This platform compares vocational courses with live industry jobs. Red highlights indicate high skill gaps requiring immediate curriculum upgrades.
+          </p>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary fw-bold" onclick="speakText()">
+              ▶️ Play Audio Guide (मराठी / हिंदी / English)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}SkillMesh - Welcome | SIH 26134{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-5">
+  <div class="col-lg-8 text-center">
+    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 bg-white rounded-pill shadow-sm border mb-4">
+      <span class="badge bg-primary">SIH 2026</span>
+      <span class="small fw-bold text-secondary">Labour-Market Intelligence & Curriculum Alignment</span>
+    </div>
+
+    <h1 class="display-4 fw-extrabold text-dark tracking-tight mb-3">
+      SkillMesh
+    </h1>
+    <p class="lead text-secondary mb-5 px-lg-5">
+      Bridging the gap between government skill-development initiatives and evolving industrial demand across Maharashtra.
+    </p>
+
+    <!-- Role Selection Cards -->
+    <div class="row g-4 text-start">
+      <!-- Admin Card -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift p-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+              <div class="fs-1 mb-2">🏛️</div>
+              <h5 class="fw-bold text-dark mb-1">State Administrator</h5>
+              <p class="small text-muted mb-3">
+                Access district heatmaps, monitor course alignment scores, and dispatch curriculum recommendations.
+              </p>
+            </div>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary fw-bold w-100 rounded-3">
+              Admin Login →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employer Card -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift p-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+              <div class="fs-1 mb-2">🏭</div>
+              <h5 class="fw-bold text-dark mb-1">Industry Employer</h5>
+              <p class="small text-muted mb-3">
+                Post current job hiring needs, tag demanded skills, and report deficits observed in recent vocational candidates.
+              </p>
+            </div>
+            <a href="{{ url_for('employer_portal') }}" class="btn btn-dark fw-bold w-100 rounded-3">
+              Employer Portal →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Public / Student Card -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 hover-lift p-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+              <div class="fs-1 mb-2">🎓</div>
+              <h5 class="fw-bold text-dark mb-1">Student / Public</h5>
+              <p class="small text-muted mb-3">
+                Explore the top 10 emerging technologies, high-growth employment sectors, and aligned courses near you.
+              </p>
+            </div>
+            <a href="{{ url_for('emerging_skills_page') }}" class="btn btn-outline-primary fw-bold w-100 rounded-3">
+              Explore Skills →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Credentials Hint -->
+    <div class="mt-5 p-3 bg-white rounded-3 border d-inline-block text-start small text-muted">
+      <strong>Demo Test Accounts:</strong><br>
+      Admin: <code>admin@mahasiksham.gov.in</code> (Pass: <code>SkillGov@2026</code>)<br>
+      Employer: <code>careers@tatamotors.com</code> (Pass: <code>TataAuto@2026</code>)
+    </div>
+  </div>
+</div>
+{% endblock %}
